@@ -9,7 +9,11 @@ function Card() {
     const [pokemonChosen, setPokemonChosen] = useState(false);
 
     const searchPokemon = () =>{
-        axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res)=> {console.log(res.data);
+      const len = document.querySelector("input").value;
+      if(!len.length){
+        alert('Please Enter a Pokemon Name');
+      }else{
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res)=> {
         setPokemon(
             {   name: pokemonName,
                 species: res.data.species.name,
@@ -23,7 +27,7 @@ function Card() {
                 type: res.data.types[0].type.name,
             })},()=>{alert("please enter a valid pokemon name")});
             setPokemonChosen(true);
-    }
+    }}
     
     
   return <div>
